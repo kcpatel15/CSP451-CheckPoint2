@@ -19,6 +19,9 @@ a real database or external authentication service.
 - Email field must not be empty
 - Password field must not be empty
 
+## Password toggle
+The password field includes a Show/Hide toggle button to let the user view the password temporarily while typing.
+
 ## Purpose
 This feature is designed for learning and practice only.
 It shows how routes, controllers, and documentation work together

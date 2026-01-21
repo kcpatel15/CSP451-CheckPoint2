@@ -1,20 +1,49 @@
 /**
- * Database module (starter stub).
+ * Database module (in-memory implementation for checkpoint).
  *
- * Feature branch: feature/database-connection should implement:
+ * Feature branch: feature/database-connection
+ * Implements:
  * - connect()
- * - a config pattern using environment variables
- * - a simple query function OR a client getter
- *
- * You may use:
- * - a "fake" in-memory database for the checkpoint, OR
- * - SQLite, OR
- * - MongoDB/Postgres (optional) — keep setup simple
+ * - getStatus()
+ * - simple query simulation
  */
 
+let connected = false;
+let connectionTime = null;
+
 function connect() {
-  // Placeholder: simulate a successful connection
-  return { connected: true, driver: "stub" };
+  if (!connected) {
+    connected = true;
+    connectionTime = new Date();
+  }
+
+  return {
+    connected,
+    connectedAt: connectionTime,
+    driver: "in-memory-stub",
+  };
 }
 
-module.exports = { connect };
+function getStatus() {
+  return {
+    connected,
+    connectedAt: connectionTime,
+  };
+}
+
+function fakeQuery() {
+  if (!connected) {
+    throw new Error("Database not connected");
+  }
+
+  return {
+    result: "sample data",
+    fetchedAt: new Date(),
+  };
+}
+
+module.exports = {
+  connect,
+  getStatus,
+  fakeQuery,
+};

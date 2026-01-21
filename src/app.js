@@ -6,6 +6,7 @@ const { router: viewRouter } = require("./routes/views");
 const db = require("./db");
 
 const app = express();
+app.use(express.json());
 
 // Body parsing
 app.use(express.json());

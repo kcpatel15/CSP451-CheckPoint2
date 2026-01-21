@@ -3,6 +3,7 @@ const path = require("path");
 
 const { router: apiRouter } = require("./routes/api");
 const { router: viewRouter } = require("./routes/views");
+const db = require("./db");
 
 const app = express();
 app.use(express.json());
@@ -17,6 +18,8 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 // Routes
 app.use("/", viewRouter);
 app.use("/api", apiRouter);
+db.connect();
+
 
 // 404 handler
 app.use((req, res) => {
